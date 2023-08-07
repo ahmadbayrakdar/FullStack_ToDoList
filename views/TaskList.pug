@@ -1,0 +1,35 @@
+doctype html
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        link(rel='stylesheet', type='text/css', href='./TaskList.css')
+        title #{title}
+    body 
+    .container
+      form(action="/tasks", method="post")    
+        h2 TODO LIST
+        h3 Add Item
+        p
+          input#new-task(type="text" , name="title")
+          button(type="submit") Add
+
+      h3 Todo
+      ul#incomplete-tasks
+        each taskItem in taskItems
+          li
+            input(type="checkbox")
+            input(type="text", value=`${taskItem.title}`)
+            input(type="text", name="taskId", value=`${taskItem._id}`).hidden
+            form(action=`/tasks/${taskItem._id}?_method=DELETE`, method="POST")
+              input(type="hidden", name="_method", value="DELETE")
+              button.delete(type="submit") Delete
+
+      h3 Completed
+      ul#completed-tasks
+        li
+          input(type="checkbox", checked)
+          label See the Doctor
+          input(type="text")
+          button.edit Edit
+          button.delete Delete
