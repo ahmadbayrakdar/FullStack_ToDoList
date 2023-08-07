@@ -11,9 +11,10 @@ router.post('/', createNewTask);
 
 router.get('/', getAllTasks);
 
-router.put('/:taskId', updateTasks);
+// router.put('/:taskId', updateTasks);
 
 // router.delete('/:taskId', deleteTask);
-router.post('/:taskId', deleteTask);
+router.post('/:taskId', updateTasks);
+router.post('/remove/:taskId', deleteTask);
 
 module.exports = router;

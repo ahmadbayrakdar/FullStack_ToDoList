@@ -18,18 +18,19 @@ html(lang="en")
       ul#incomplete-tasks
         each taskItem in taskItems
           li
-            input(type="checkbox")
-            input(type="text", value=`${taskItem.title}`)
-            input(type="text", name="taskId", value=`${taskItem._id}`).hidden
-            form(action=`/tasks/${taskItem._id}?_method=DELETE`, method="POST")
+            form(action=`/tasks/${taskItem._id}?_method=PUT`, method="POST")
+              input(type="checkbox", checked=taskItem.completed, name="completed")
+              input(type="text", value=`${taskItem.title}` name="title", style=`text-decoration: ${taskItem.completed ? 'line-through' : 'none'}`)
+              button(type="submit") Save
+            form(action=`/tasks/remove/${taskItem._id}?_method=DELETE`, method="POST")
               input(type="hidden", name="_method", value="DELETE")
               button.delete(type="submit") Delete
 
-      h3 Completed
-      ul#completed-tasks
-        li
-          input(type="checkbox", checked)
-          label See the Doctor
-          input(type="text")
-          button.edit Edit
-          button.delete Delete
+      //- h3 Completed
+      //- ul#completed-tasks
+      //-   li
+      //-     input(type="checkbox", checked)
+      //-     label See the Doctor
+      //-     input(type="text")
+      //-     button.edit Edit
+      //-     button.delete Delete
